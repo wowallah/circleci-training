@@ -4,7 +4,7 @@ commands:
   print_pipeline_id:
     description: "Print the Circle CI Workflow ID"
     steps:
-      - run: echo $CIRCLE_WORKFLOW_ID
+      - run: echo ${CIRCLE_WORKFLOW_ID}
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
       - run:
           name: "echo an env var that is part of our project"
           command: |
-            echo $MY_ENV_VAR
+            echo ${MY_ENV_VAR}
   use_command:
     docker:
       - image: cimg/base:2020.01
