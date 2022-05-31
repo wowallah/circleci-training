@@ -1,8 +1,10 @@
 version: 2.1
-workflows:
-  test-env-vars:
-    jobs:
-      - build
+
+commands:
+  print_pipeline_id:
+    description: "Print the Circle CI Workflow ID"
+    steps:
+      - run: echo $CIRCLE_WORKFLOW_ID
 
 jobs:
   build:
@@ -14,3 +16,14 @@ jobs:
           name: "echo an env var that is part of our project"
           command: |
             echo $MY_ENV_VAR
+  use_command:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - print_pipeline_id
+
+workflows:
+  using-commands:
+    jobs:
+      - build
+      - use_command
